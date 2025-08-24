@@ -132,7 +132,7 @@ export default function LandingPage() {
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
           <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent z-10">
-            Workforce.pk
+            Eventforce.pk
           </Link>
 
           {/* Desktop Navigation */}
@@ -167,10 +167,10 @@ export default function LandingPage() {
       <section id="home" className="relative flex items-center justify-center min-h-screen text-center px-6 pt-20">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-extrabold drop-shadow-lg bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-            Professional Workforce Solutions for Your Events
+            Professional Eventforce Solutions for Your Events
           </h1>
           <p className="mt-6 text-lg md:text-xl text-gray-700 dark:text-gray-300">
-            From ushers and security to ticketing and logistics — Workforce.pk provides everything you need for a flawless event.
+            From ushers and security to ticketing and logistics — Eventforce.pk provides everything you need for a flawless event.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/appoint" className="px-8 py-4 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-all shadow-lg hover:shadow-cyan-500/30 text-white font-semibold text-lg">
@@ -283,7 +283,7 @@ export default function LandingPage() {
       {/* About Section */}
       <section className="py-20 bg-gradient-to-br from-cyan-900/40 to-cyan-700/20 backdrop-blur-md">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-cyan-500 mb-8">Why Choose Workforce.pk?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-cyan-500 mb-8">Why Choose Eventforce.pk?</h2>
           
           <div className="grid md:grid-cols-3 gap-8 mt-12 text-left">
             <div className={isDark ? "bg-white/10 p-6 rounded-xl" : "bg-white/80 p-6 rounded-xl"}>
@@ -364,7 +364,7 @@ export default function LandingPage() {
       <footer className={isDark ? "bg-black/40 backdrop-blur-lg py-12" : "bg-gray-100 backdrop-blur-lg py-12 border-t border-gray-200"}>
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 px-6">
           <div>
-            <h4 className="text-xl font-bold text-cyan-500 mb-4">Workforce.pk</h4>
+            <h4 className="text-xl font-bold text-cyan-500 mb-4">Eventforce.pk</h4>
             <p className="text-gray-700 dark:text-gray-300 mb-4">Delivering trusted staffing, ticketing, and event solutions across Pakistan.</p>
             <div className="flex space-x-4">
               <a href="#" className="hover:text-cyan-500 transition"><Facebook className="h-5 w-5" /></a>
@@ -411,7 +411,7 @@ export default function LandingPage() {
             </ul>
           </div>
         </div>
-        <p className="text-center mt-10 text-gray-600 dark:text-gray-400">© {new Date().getFullYear()} Workforce.pk. All rights reserved.</p>
+        <p className="text-center mt-10 text-gray-600 dark:text-gray-400">© {new Date().getFullYear()} Eventforce.pk. All rights reserved.</p>
       </footer>
     </div>
   );
