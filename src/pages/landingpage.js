@@ -25,6 +25,7 @@ import {
   ChevronLeft,
   ChevronRight
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function LandingPage() {
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -171,44 +172,66 @@ export default function LandingPage() {
           </button>
         </div>
 
-        {/* Enhanced Mobile Dropdown Menu with Translucent Blur */}
-        {mobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-white/15 dark:bg-gray-900/20 backdrop-blur-md rounded-b-2xl shadow-lg border border-white/10 mt-2 py-2">
-            <div className="flex flex-col">
-              <button 
-                onClick={() => scrollToSection("home")} 
-                className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 hover:text-cyan-500 hover:bg-white/10 dark:hover:bg-white/5 transition-all duration-200 border-b border-white/10 flex items-center"
+     {/* Enhanced Mobile Dropdown Menu with Matching Blur & Bubble Effect */}
+                    <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="md:hidden absolute top-full left-0 right-0 
+                          bg-gradient-to-br from-white/10 via-white/5 to-white/10 
+                          dark:from-black/20 dark:via-black/10 dark:to-black/20
+                          backdrop-blur-md rounded-3xl border border-white/10 
+                          shadow-xl mt-2 py-2 overflow-hidden"
               >
-                <span>Home</span>
-              </button>
-              <button 
-                onClick={() => scrollToSection("services")} 
-                className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 hover:text-cyan-500 hover:bg-white/10 dark:hover:bg-white/5 transition-all duration-200 border-b border-white/10 flex items-center"
-              >
-                <span>Services</span>
-              </button>
-              <button 
-                onClick={() => scrollToSection("gallery")} 
-                className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 hover:text-cyan-500 hover:bg-white/10 dark:hover:bg-white/5 transition-all duration-200 border-b border-white/10 flex items-center"
-              >
-                <span>Gallery</span>
-              </button>
-              <button 
-                onClick={() => scrollToSection("faqs")} 
-                className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 hover:text-cyan-500 hover:bg-white/10 dark:hover:bg-white/5 transition-all duration-200 border-b border-white/10 flex items-center"
-              >
-                <span>FAQs</span>
-              </button>
-              <Link 
-                to="/appoint" 
-                className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 hover:text-cyan-500 hover:bg-white/10 dark:hover:bg-white/5 transition-all duration-200 flex items-center"
-              >
-                <span>Appoint Us</span>
-              </Link>
-            </div>
-          </div>
-        )}
-      </header>
+                <div className="flex flex-col">
+                  <button 
+                    onClick={() => scrollToSection("home")} 
+                    className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
+                              hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                              transition-all duration-200 border-b border-white/10 flex items-center"
+                  >
+                    Home
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("services")} 
+                    className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
+                              hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                              transition-all duration-200 border-b border-white/10 flex items-center"
+                  >
+                    Services
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("gallery")} 
+                    className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
+                              hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                              transition-all duration-200 border-b border-white/10 flex items-center"
+                  >
+                    Gallery
+                  </button>
+                  <button 
+                    onClick={() => scrollToSection("faqs")} 
+                    className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
+                              hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                              transition-all duration-200 border-b border-white/10 flex items-center"
+                  >
+                    FAQs
+                  </button>
+                  <Link 
+                    to="/appoint" 
+                    className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
+                              hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                              transition-all duration-200 flex items-center"
+                  >
+                    Appoint Us
+                  </Link>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </header>
 
       {/* Hero Section with Background Image - Fixed for mobile */}
       <section id="home" className="relative flex items-center justify-center min-h-screen px-4 pt-20 overflow-hidden">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { 
   Calendar, 
@@ -13,8 +13,11 @@ import {
   Ticket,
   Briefcase,
   Award,
-  Truck
+  Truck,
+  Menu,
+  X
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function AppointUs() {
   const [formData, setFormData] = useState({
@@ -33,7 +36,9 @@ export default function AppointUs() {
   const [result, setResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const headerRef = useRef(null);
 
   // Detect system theme preference
   useEffect(() => {
@@ -46,6 +51,22 @@ export default function AppointUs() {
     return () => {
       window.matchMedia("(prefers-color-scheme: dark)").removeEventListener("change", listener);
     };
+  }, []);
+
+  // Header scroll effect (same as landing page)
+  useEffect(() => {
+    const handleScroll = () => {
+      if (headerRef.current) {
+        if (window.scrollY > 50) {
+          headerRef.current.classList.add("scrolled");
+        } else {
+          headerRef.current.classList.remove("scrolled");
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleChange = (e) => {
@@ -122,6 +143,14 @@ export default function AppointUs() {
     window.scrollTo(0, 0);
   };
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setMobileMenuOpen(false);
+  };
+
   const serviceOptions = [
     { value: "ushers", label: "Event Ushers", icon: <Users className="w-5 h-5" /> },
     { value: "ticketing", label: "Ticketing & Counters", icon: <Ticket className="w-5 h-5" /> },
@@ -143,38 +172,87 @@ export default function AppointUs() {
   ];
 
   return (
-    <div className={`min-h-screen ${isDark ? "bg-gradient-to-br from-gray-900 via-gray-800 to-black" : "bg-gradient-to-br from-slate-100 via-white to-slate-200"} text-slate-900 dark:text-slate-100 flex flex-col`}>
-      {/* Header */}
-      <header className={`fixed top-0 w-full ${isDark ? "bg-gray-900/70" : "bg-white/70"} backdrop-blur-md shadow z-50`}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link to="/" className="text-xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent flex items-center">
+    <div className={isDark ? "bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen" : "bg-gradient-to-tr from-white via-cyan-50 to-gray-100 text-gray-800 min-h-screen"}>
+      {/* Header with bubble shape and translucent blur (same as landing page) */}
+      <header
+        ref={headerRef}
+        className="fixed top-4 left-1/2 transform -translate-x-1/2 w-11/12 max-w-6xl rounded-3xl z-50 transition-all duration-300 bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/10"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
+          <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent z-10 flex items-center">
             <ArrowLeft className="mr-2 w-5 h-5" /> Workforce.pk
           </Link>
-          <nav className="space-x-6">
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex space-x-8 text-slate-700 dark:text-slate-200 font-medium">
             <Link to="/" className="hover:text-cyan-500 transition">Home</Link>
-            <a href="#contact" className="hover:text-cyan-500 transition">Contact</a>
+            <button onClick={() => scrollToSection("contact")} className="hover:text-cyan-500 transition">Contact</button>
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden z-10 text-slate-700 dark:text-slate-200"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
+
+        {/* Enhanced Mobile Dropdown Menu with Matching Blur & Bubble Effect */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="md:hidden absolute top-full left-0 right-0 
+                        bg-gradient-to-br from-white/10 via-white/5 to-white/10 
+                        dark:from-black/20 dark:via-black/10 dark:to-black/20
+                        backdrop-blur-md rounded-3xl border border-white/10 
+                        shadow-xl mt-2 py-2 overflow-hidden"
+            >
+              <div className="flex flex-col">
+                <Link 
+                  to="/" 
+                  className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
+                            hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                            transition-all duration-200 border-b border-white/10 flex items-center"
+                >
+                  Home
+                </Link>
+                <button 
+                  onClick={() => scrollToSection("contact")} 
+                  className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
+                            hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                            transition-all duration-200 flex items-center"
+                >
+                  Contact
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Main Content */}
       <main className="flex-grow pt-28 pb-16 px-6">
-        <div className={`max-w-4xl mx-auto ${isDark ? "bg-gray-800/70" : "bg-white/70"} backdrop-blur-lg shadow-2xl rounded-2xl p-8`}>
+        <div className={`max-w-4xl mx-auto ${isDark ? "bg-gray-800/40" : "bg-white/70"} backdrop-blur-lg shadow-2xl rounded-2xl p-8`}>
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
               Appoint Our Services
             </h2>
-            <p className="mt-2 text-slate-600 dark:text-slate-300">
+            <p className="mt-2 text-slate-400">
               Complete the form below to request our professional workforce services.
             </p>
             
             {/* Progress Bar */}
             <div className="mt-6 mb-2">
-              <div className="flex justify-between mb-2 text-sm text-slate-500 dark:text-slate-400">
+              <div className="flex justify-between mb-2 text-sm text-slate-400">
                 <span>Step {currentStep} of 3</span>
                 <span>{Math.round((currentStep / 3) * 100)}% Complete</span>
               </div>
-              <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5">
+              <div className="w-full bg-slate-700 rounded-full h-2.5">
                 <div 
                   className="bg-gradient-to-r from-cyan-500 to-blue-600 h-2.5 rounded-full" 
                   style={{ width: `${(currentStep / 3) * 100}%` }}
@@ -200,7 +278,7 @@ export default function AppointUs() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
                     placeholder="Your full name"
                   />
                 </div>
@@ -214,7 +292,7 @@ export default function AppointUs() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -226,7 +304,7 @@ export default function AppointUs() {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
                       placeholder="+92 300 1234567"
                     />
                   </div>
@@ -259,7 +337,7 @@ export default function AppointUs() {
                     value={formData.eventType}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
                   >
                     <option value="">Select Event Type</option>
                     {eventTypes.map(type => (
@@ -277,7 +355,7 @@ export default function AppointUs() {
                       value={formData.date}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
                     />
                   </div>
                   <div>
@@ -288,7 +366,7 @@ export default function AppointUs() {
                       value={formData.time}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
                     />
                   </div>
                 </div>
@@ -300,7 +378,7 @@ export default function AppointUs() {
                       name="duration"
                       value={formData.duration}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
                     >
                       <option value="2 hours">2 hours</option>
                       <option value="4 hours">4 hours</option>
@@ -315,7 +393,7 @@ export default function AppointUs() {
                       name="attendees"
                       value={formData.attendees}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
                     >
                       <option value="Less than 50">Less than 50</option>
                       <option value="50-100">50-100</option>
@@ -335,7 +413,7 @@ export default function AppointUs() {
                       name="location"
                       value={formData.location}
                       onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
                       placeholder="Venue name and address"
                     />
                   </div>
@@ -345,7 +423,7 @@ export default function AppointUs() {
                   <button
                     type="button"
                     onClick={prevStep}
-                    className="px-6 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium hover:bg-slate-100 dark:hover:bg-slate-700 transition"
+                    className="px-6 py-3 rounded-xl border border-slate-700 text-slate-300 font-medium hover:bg-slate-700 transition"
                   >
                     Back
                   </button>
@@ -374,7 +452,7 @@ export default function AppointUs() {
                     {serviceOptions.map((service) => (
                       <label 
                         key={service.value} 
-                        className={`flex items-center space-x-3 ${isDark ? "bg-slate-700/50" : "bg-slate-100/70"} px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 cursor-pointer transition hover:shadow-md ${formData.services.includes(service.value) ? 'ring-2 ring-cyan-500' : ''}`}
+                        className="flex items-center space-x-3 bg-slate-700/50 px-4 py-3 rounded-lg border border-slate-700 cursor-pointer transition hover:shadow-md"
                       >
                         <input
                           type="checkbox"
@@ -401,7 +479,7 @@ export default function AppointUs() {
                       value={formData.message}
                       onChange={handleChange}
                       rows="4"
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
                       placeholder="Tell us more about your event and specific requirements..."
                     />
                   </div>
@@ -411,7 +489,7 @@ export default function AppointUs() {
                   <button
                     type="button"
                     onClick={prevStep}
-                    className="px-6 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium hover:bg-slate-100 dark:hover:bg-slate-700 transition"
+                    className="px-6 py-3 rounded-xl border border-slate-700 text-slate-300 font-medium hover:bg-slate-700 transition"
                   >
                     Back
                   </button>
@@ -440,41 +518,41 @@ export default function AppointUs() {
           </form>
 
           {result && (
-            <div className={`mt-6 p-4 rounded-xl ${result.includes("Successfully") ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300" : "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"}`}>
+            <div className={`mt-6 p-4 rounded-xl ${result.includes("Successfully") ? "bg-green-900/30 text-green-300" : "bg-blue-900/30 text-blue-300"}`}>
               {result}
             </div>
           )}
         </div>
 
         {/* Contact Information */}
-        <div id="contact" className={`max-w-4xl mx-auto mt-12 ${isDark ? "bg-gray-800/70" : "bg-white/70"} backdrop-blur-lg shadow-xl rounded-2xl p-8`}>
+        <div id="contact" className={`max-w-4xl mx-auto mt-12 ${isDark ? "bg-gray-800/40" : "bg-white/70"} backdrop-blur-lg shadow-xl rounded-2xl p-8`}>
           <h3 className="text-2xl font-bold text-center mb-6 bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
             Contact Information
           </h3>
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="text-center p-4 rounded-xl bg-slate-100/70 dark:bg-slate-800/50">
+            <div className="text-center p-4 rounded-xl bg-slate-800/50">
               <Phone className="w-8 h-8 mx-auto text-cyan-500" />
               <h4 className="font-semibold mt-2">Phone</h4>
-              <p className="mt-1 text-slate-600 dark:text-slate-300">+92-300-1234567</p>
+              <p className="mt-1 text-slate-300">+92-300-1234567</p>
             </div>
-            <div className="text-center p-4 rounded-xl bg-slate-100/70 dark:bg-slate-800/50">
+            <div className="text-center p-4 rounded-xl bg-slate-800/50">
               <Mail className="w-8 h-8 mx-auto text-cyan-500" />
               <h4 className="font-semibold mt-2">Email</h4>
-              <p className="mt-1 text-slate-600 dark:text-slate-300">contact@workforce.pk</p>
+              <p className="mt-1 text-slate-300">contact@workforce.pk</p>
             </div>
-            <div className="text-center p-4 rounded-xl bg-slate-100/70 dark:bg-slate-800/50">
+            <div className="text-center p-4 rounded-xl bg-slate-800/50">
               <MapPin className="w-8 h-8 mx-auto text-cyan-500" />
               <h4 className="font-semibold mt-2">Location</h4>
-              <p className="mt-1 text-slate-600 dark:text-slate-300">Karachi, Pakistan</p>
+              <p className="mt-1 text-slate-300">Karachi, Pakistan</p>
             </div>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className={`${isDark ? "bg-gray-900/70" : "bg-white/70"} backdrop-blur-md shadow mt-12 py-8`}>
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-slate-600 dark:text-slate-400">© {new Date().getFullYear()} Workforce.pk. All rights reserved.</p>
+      <footer className="bg-black/40 backdrop-blur-lg py-12 border-t border-white/10 relative z-10 px-4">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+          <p className="text-sm text-slate-400">© {new Date().getFullYear()} Workforce.pk. All rights reserved.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <a href="#" className="hover:text-cyan-500 transition">Facebook</a>
             <a href="#" className="hover:text-cyan-500 transition">Twitter</a>
