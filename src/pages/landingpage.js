@@ -186,11 +186,11 @@ export default function LandingPage() {
                           backdrop-blur-md rounded-3xl border border-white/10 
                           shadow-xl mt-2 py-2 overflow-hidden"
               >
-                <div className="flex flex-col">
+                <div className="flex flex-col bckdrop-blur-md bg-white/30 dark:bg-black/40">
                   <button 
                     onClick={() => scrollToSection("home")} 
                     className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
-                              hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                              hover:text-cyan-00 hover:bg-white/5 dark:hover:bg-white/5 
                               transition-all duration-200 border-b border-white/10 flex items-center"
                   >
                     Home

@@ -212,7 +212,7 @@ export default function AppointUs() {
                         backdrop-blur-md rounded-3xl border border-white/10 
                         shadow-xl mt-2 py-2 overflow-hidden"
             >
-              <div className="flex flex-col">
+              <div className="flex flex-col  bckdrop-blur-md bg-white/30 dark:bg-black/40">
                 <Link 
                   to="/" 
                   className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
