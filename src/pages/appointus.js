@@ -53,7 +53,7 @@ export default function AppointUs() {
     };
   }, []);
 
-  // Header scroll effect (same as landing page)
+  // Header scroll effect
   useEffect(() => {
     const handleScroll = () => {
       if (headerRef.current) {
@@ -172,21 +172,24 @@ export default function AppointUs() {
   ];
 
   return (
-    <div className={isDark ? "bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen" : "bg-gradient-to-tr from-white via-cyan-50 to-gray-100 text-gray-800 min-h-screen"}>
-      {/* Header with bubble shape and translucent blur (same as landing page) */}
+    <div className={isDark ? "bg-[#000020] text-white min-h-screen" : "bg-gradient-to-tr from-white via-yellow-50 to-gray-100 text-gray-800 min-h-screen"} style={isDark ? { background: "linear-gradient(135deg, #000020 0%, #000080 50%, #000040 100%)" } : {}}>
+      {/* Header with bubble shape and translucent blur */}
       <header
         ref={headerRef}
-        className="fixed top-4 left-1/2 transform -translate-x-1/2 w-11/12 max-w-6xl rounded-3xl z-50 transition-all duration-300 bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/10"
+        className="fixed top-4 left-1/2 transform -translate-x-1/2 w-11/12 max-w-6xl rounded-3xl z-50 transition-all duration-300 bg-white/10 dark:bg-[#000080]/30 backdrop-blur-md border border-white/10"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-          <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent z-10 flex items-center">
-            <ArrowLeft className="mr-2 w-5 h-5" /> Workforce.pk
+          <Link to="/" className="text-2xl font-bold z-10 flex items-center">
+            <ArrowLeft className="mr-2 w-5 h-5" />
+            <span className={isDark ? "text-white" : "text-[#000080]"}>Work</span>
+            <span className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent">Force</span>
+            <span className={isDark ? "text-white" : "text-[#000080]"}>.pk</span>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8 text-slate-700 dark:text-slate-200 font-medium">
-            <Link to="/" className="hover:text-cyan-500 transition">Home</Link>
-            <button onClick={() => scrollToSection("contact")} className="hover:text-cyan-500 transition">Contact</button>
+            <Link to="/" className="hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Home</Link>
+            <button onClick={() => scrollToSection("contact")} className="hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Contact</button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -208,15 +211,15 @@ export default function AppointUs() {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="md:hidden absolute top-full left-0 right-0 
                         bg-gradient-to-br from-white/10 via-white/5 to-white/10 
-                        dark:from-black/20 dark:via-black/10 dark:to-black/20
+                        dark:bg-[#000080]/30
                         backdrop-blur-md rounded-3xl border border-white/10 
                         shadow-xl mt-2 py-2 overflow-hidden"
             >
-              <div className="flex flex-col  bckdrop-blur-md bg-white/30 dark:bg-black/40">
+              <div className="flex flex-col backdrop-blur-md bg-white/30 dark:bg-[#000080]/40">
                 <Link 
                   to="/" 
                   className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
-                            hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                            hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent
                             transition-all duration-200 border-b border-white/10 flex items-center"
                 >
                   Home
@@ -224,7 +227,7 @@ export default function AppointUs() {
                 <button 
                   onClick={() => scrollToSection("contact")} 
                   className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
-                            hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                            hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent
                             transition-all duration-200 flex items-center"
                 >
                   Contact
@@ -237,9 +240,9 @@ export default function AppointUs() {
 
       {/* Main Content */}
       <main className="flex-grow pt-28 pb-16 px-6">
-        <div className={`max-w-4xl mx-auto ${isDark ? "bg-gray-800/40" : "bg-white/70"} backdrop-blur-lg shadow-2xl rounded-2xl p-8`}>
+        <div className={`max-w-4xl mx-auto ${isDark ? "bg-[#000080]/20" : "bg-white/80"} backdrop-blur-lg shadow-2xl rounded-2xl p-8 border ${isDark ? "border-[#000080]/30" : "border-gray-200"}`}>
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent">
               Appoint Our Services
             </h2>
             <p className="mt-2 text-slate-400">
@@ -252,9 +255,9 @@ export default function AppointUs() {
                 <span>Step {currentStep} of 3</span>
                 <span>{Math.round((currentStep / 3) * 100)}% Complete</span>
               </div>
-              <div className="w-full bg-slate-700 rounded-full h-2.5">
+              <div className={`w-full ${isDark ? "bg-slate-700" : "bg-gray-200"} rounded-full h-2.5`}>
                 <div 
-                  className="bg-gradient-to-r from-cyan-500 to-blue-600 h-2.5 rounded-full" 
+                  className="bg-gradient-to-r from-yellow-400 to-yellow-500 h-2.5 rounded-full" 
                   style={{ width: `${(currentStep / 3) * 100}%` }}
                 ></div>
               </div>
@@ -265,7 +268,7 @@ export default function AppointUs() {
             {/* Step 1: Personal Information */}
             {currentStep === 1 && (
               <div className="space-y-6">
-                <h3 className="text-xl font-semibold text-cyan-500 flex items-center">
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent flex items-center">
                   <Users className="mr-2 w-5 h-5" />
                   Personal Information
                 </h3>
@@ -278,7 +281,7 @@ export default function AppointUs() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                    className={`w-full px-4 py-3 rounded-xl border ${isDark ? "border-slate-700 bg-slate-900/50" : "border-gray-300 bg-white"} focus:ring-2 focus:ring-yellow-500 outline-none transition`}
                     placeholder="Your full name"
                   />
                 </div>
@@ -292,7 +295,7 @@ export default function AppointUs() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className={`w-full px-4 py-3 rounded-xl border ${isDark ? "border-slate-700 bg-slate-900/50" : "border-gray-300 bg-white"} focus:ring-2 focus:ring-yellow-500 outline-none transition`}
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -304,7 +307,7 @@ export default function AppointUs() {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className={`w-full px-4 py-3 rounded-xl border ${isDark ? "border-slate-700 bg-slate-900/50" : "border-gray-300 bg-white"} focus:ring-2 focus:ring-yellow-500 outline-none transition`}
                       placeholder="+92 300 1234567"
                     />
                   </div>
@@ -314,7 +317,7 @@ export default function AppointUs() {
                   <button
                     type="button"
                     onClick={nextStep}
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold shadow-lg hover:opacity-90 transition flex items-center"
+                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 text-white font-semibold shadow-lg hover:opacity-90 transition transform hover:scale-105 flex items-center"
                   >
                     Next <Users className="ml-2 w-4 h-4" />
                   </button>
@@ -325,7 +328,7 @@ export default function AppointUs() {
             {/* Step 2: Event Details */}
             {currentStep === 2 && (
               <div className="space-y-6">
-                <h3 className="text-xl font-semibold text-cyan-500 flex items-center">
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent flex items-center">
                   <Calendar className="mr-2 w-5 h-5" />
                   Event Details
                 </h3>
@@ -337,7 +340,7 @@ export default function AppointUs() {
                     value={formData.eventType}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                    className={`w-full px-4 py-3 rounded-xl border ${isDark ? "border-slate-700 bg-slate-900/50" : "border-gray-300 bg-white"} focus:ring-2 focus:ring-yellow-500 outline-none transition`}
                   >
                     <option value="">Select Event Type</option>
                     {eventTypes.map(type => (
@@ -355,7 +358,7 @@ export default function AppointUs() {
                       value={formData.date}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className={`w-full px-4 py-3 rounded-xl border ${isDark ? "border-slate-700 bg-slate-900/50" : "border-gray-300 bg-white"} focus:ring-2 focus:ring-yellow-500 outline-none transition`}
                     />
                   </div>
                   <div>
@@ -366,7 +369,7 @@ export default function AppointUs() {
                       value={formData.time}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className={`w-full px-4 py-3 rounded-xl border ${isDark ? "border-slate-700 bg-slate-900/50" : "border-gray-300 bg-white"} focus:ring-2 focus:ring-yellow-500 outline-none transition`}
                     />
                   </div>
                 </div>
@@ -378,7 +381,7 @@ export default function AppointUs() {
                       name="duration"
                       value={formData.duration}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className={`w-full px-4 py-3 rounded-xl border ${isDark ? "border-slate-700 bg-slate-900/50" : "border-gray-300 bg-white"} focus:ring-2 focus:ring-yellow-500 outline-none transition`}
                     >
                       <option value="2 hours">2 hours</option>
                       <option value="4 hours">4 hours</option>
@@ -393,7 +396,7 @@ export default function AppointUs() {
                       name="attendees"
                       value={formData.attendees}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className={`w-full px-4 py-3 rounded-xl border ${isDark ? "border-slate-700 bg-slate-900/50" : "border-gray-300 bg-white"} focus:ring-2 focus:ring-yellow-500 outline-none transition`}
                     >
                       <option value="Less than 50">Less than 50</option>
                       <option value="50-100">50-100</option>
@@ -407,13 +410,13 @@ export default function AppointUs() {
                 <div>
                   <label className="block text-sm font-medium mb-2">Event Location</label>
                   <div className="relative">
-                    <MapPin className="absolute left-3 top-3.5 w-5 h-5 text-slate-400" />
+                    <MapPin className={`absolute left-3 top-3.5 w-5 h-5 ${isDark ? "text-slate-400" : "text-gray-400"}`} />
                     <input
                       type="text"
                       name="location"
                       value={formData.location}
                       onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className={`w-full pl-10 pr-4 py-3 rounded-xl border ${isDark ? "border-slate-700 bg-slate-900/50" : "border-gray-300 bg-white"} focus:ring-2 focus:ring-yellow-500 outline-none transition`}
                       placeholder="Venue name and address"
                     />
                   </div>
@@ -423,14 +426,14 @@ export default function AppointUs() {
                   <button
                     type="button"
                     onClick={prevStep}
-                    className="px-6 py-3 rounded-xl border border-slate-700 text-slate-300 font-medium hover:bg-slate-700 transition"
+                    className={`px-6 py-3 rounded-xl border ${isDark ? "border-slate-700 text-slate-300 hover:bg-slate-700" : "border-gray-300 text-gray-700 hover:bg-gray-100"} font-medium transition`}
                   >
                     Back
                   </button>
                   <button
                     type="button"
                     onClick={nextStep}
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold shadow-lg hover:opacity-90 transition flex items-center"
+                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 text-white font-semibold shadow-lg hover:opacity-90 transition transform hover:scale-105 flex items-center"
                   >
                     Next <Calendar className="ml-2 w-4 h-4" />
                   </button>
@@ -441,7 +444,7 @@ export default function AppointUs() {
             {/* Step 3: Services & Message */}
             {currentStep === 3 && (
               <div className="space-y-6">
-                <h3 className="text-xl font-semibold text-cyan-500 flex items-center">
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent flex items-center">
                   <CheckCircle className="mr-2 w-5 h-5" />
                   Services & Final Details
                 </h3>
@@ -452,17 +455,19 @@ export default function AppointUs() {
                     {serviceOptions.map((service) => (
                       <label 
                         key={service.value} 
-                        className="flex items-center space-x-3 bg-slate-700/50 px-4 py-3 rounded-lg border border-slate-700 cursor-pointer transition hover:shadow-md"
+                        className={`flex items-center space-x-3 px-4 py-3 rounded-lg border cursor-pointer transition hover:shadow-md ${isDark ? "bg-slate-700/50 border-slate-700" : "bg-white border-gray-300"}`}
                       >
                         <input
                           type="checkbox"
                           value={service.value}
                           checked={formData.services.includes(service.value)}
                           onChange={handleServiceChange}
-                          className="w-4 h-4 text-cyan-500 border-gray-300 rounded focus:ring-cyan-500"
+                          className="w-4 h-4 text-yellow-500 border-gray-300 rounded focus:ring-yellow-500"
                         />
                         <span className="flex items-center">
-                          {service.icon}
+                          <span className={isDark ? "text-yellow-500" : "text-yellow-600"}>
+                            {service.icon}
+                          </span>
                           <span className="ml-2">{service.label}</span>
                         </span>
                       </label>
@@ -473,13 +478,13 @@ export default function AppointUs() {
                 <div>
                   <label className="block text-sm font-medium mb-2">Additional Message</label>
                   <div className="relative">
-                    <MessageCircle className="absolute left-3 top-3.5 w-5 h-5 text-slate-400" />
+                    <MessageCircle className={`absolute left-3 top-3.5 w-5 h-5 ${isDark ? "text-slate-400" : "text-gray-400"}`} />
                     <textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       rows="4"
-                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-700 bg-slate-900/50 focus:ring-2 focus:ring-cyan-500 outline-none transition"
+                      className={`w-full pl-10 pr-4 py-3 rounded-xl border ${isDark ? "border-slate-700 bg-slate-900/50" : "border-gray-300 bg-white"} focus:ring-2 focus:ring-yellow-500 outline-none transition`}
                       placeholder="Tell us more about your event and specific requirements..."
                     />
                   </div>
@@ -489,14 +494,14 @@ export default function AppointUs() {
                   <button
                     type="button"
                     onClick={prevStep}
-                    className="px-6 py-3 rounded-xl border border-slate-700 text-slate-300 font-medium hover:bg-slate-700 transition"
+                    className={`px-6 py-3 rounded-xl border ${isDark ? "border-slate-700 text-slate-300 hover:bg-slate-700" : "border-gray-300 text-gray-700 hover:bg-gray-100"} font-medium transition`}
                   >
                     Back
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold shadow-lg hover:opacity-90 transition disabled:opacity-50 flex items-center"
+                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 text-white font-semibold shadow-lg hover:opacity-90 transition transform hover:scale-105 disabled:opacity-50 flex items-center"
                   >
                     {isSubmitting ? (
                       <>
@@ -525,39 +530,39 @@ export default function AppointUs() {
         </div>
 
         {/* Contact Information */}
-        <div id="contact" className={`max-w-4xl mx-auto mt-12 ${isDark ? "bg-gray-800/40" : "bg-white/70"} backdrop-blur-lg shadow-xl rounded-2xl p-8`}>
-          <h3 className="text-2xl font-bold text-center mb-6 bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
+        <div id="contact" className={`max-w-4xl mx-auto mt-12 ${isDark ? "bg-[#000080]/20" : "bg-white/80"} backdrop-blur-lg shadow-xl rounded-2xl p-8 border ${isDark ? "border-[#000080]/30" : "border-gray-200"}`}>
+          <h3 className="text-2xl font-bold text-center mb-6 bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent">
             Contact Information
           </h3>
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="text-center p-4 rounded-xl bg-slate-800/50">
-              <Phone className="w-8 h-8 mx-auto text-cyan-500" />
+            <div className={`text-center p-4 rounded-xl ${isDark ? "bg-slate-800/50" : "bg-yellow-50"}`}>
+              <Phone className="w-8 h-8 mx-auto text-yellow-500" />
               <h4 className="font-semibold mt-2">Phone</h4>
-              <p className="mt-1 text-slate-300">+92-300-1234567</p>
+              <p className={`mt-1 ${isDark ? "text-slate-300" : "text-gray-600"}`}>+92-300-1234567</p>
             </div>
-            <div className="text-center p-4 rounded-xl bg-slate-800/50">
-              <Mail className="w-8 h-8 mx-auto text-cyan-500" />
+            <div className={`text-center p-4 rounded-xl ${isDark ? "bg-slate-800/50" : "bg-yellow-50"}`}>
+              <Mail className="w-8 h-8 mx-auto text-yellow-500" />
               <h4 className="font-semibold mt-2">Email</h4>
-              <p className="mt-1 text-slate-300">contact@workforce.pk</p>
+              <p className={`mt-1 ${isDark ? "text-slate-300" : "text-gray-600"}`}>contact@workforce.pk</p>
             </div>
-            <div className="text-center p-4 rounded-xl bg-slate-800/50">
-              <MapPin className="w-8 h-8 mx-auto text-cyan-500" />
+            <div className={`text-center p-4 rounded-xl ${isDark ? "bg-slate-800/50" : "bg-yellow-50"}`}>
+              <MapPin className="w-8 h-8 mx-auto text-yellow-500" />
               <h4 className="font-semibold mt-2">Location</h4>
-              <p className="mt-1 text-slate-300">Karachi, Pakistan</p>
+              <p className={`mt-1 ${isDark ? "text-slate-300" : "text-gray-600"}`}>Karachi, Pakistan</p>
             </div>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="bg-black/40 backdrop-blur-lg py-12 border-t border-white/10 relative z-10 px-4">
+      <footer className={`${isDark ? "bg-[#000040]/40" : "bg-yellow-50"} backdrop-blur-lg py-12 border-t ${isDark ? "border-white/10" : "border-yellow-200"} relative z-10 px-4`}>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-slate-400">© {new Date().getFullYear()} Workforce.pk. All rights reserved.</p>
+          <p className={`text-sm ${isDark ? "text-slate-400" : "text-gray-600"}`}>© {new Date().getFullYear()} Workforce.pk. All rights reserved.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            <a href="#" className="hover:text-cyan-500 transition">Facebook</a>
-            <a href="#" className="hover:text-cyan-500 transition">Twitter</a>
-            <a href="#" className="hover:text-cyan-500 transition">LinkedIn</a>
-            <a href="#" className="hover:text-cyan-500 transition">Instagram</a>
+            <a href="#" className="hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Facebook</a>
+            <a href="#" className="hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Twitter</a>
+            <a href="#" className="hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">LinkedIn</a>
+            <a href="#" className="hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Instagram</a>
           </div>
         </div>
       </footer>

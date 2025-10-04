@@ -73,14 +73,14 @@ export default function LandingPage() {
   }, []);
 
   const services = [
-    { icon: <Users className="w-10 h-10 text-cyan-400" />, title: "Human Workforce", desc: "Trained manpower for corporate, hospitality, and mega events." },
-    { icon: <Ticket className="w-10 h-10 text-cyan-400" />, title: "Ticketing Solutions", desc: "Seamless ticketing platforms & onsite management." },
-    { icon: <Shield className="w-10 h-10 text-cyan-400" />, title: "Ushers & Security", desc: "Professional ushers, event staff, and certified security personnel." },
-    { icon: <Briefcase className="w-10 h-10 text-cyan-400" />, title: "Corporate Staffing", desc: "Temporary and permanent staffing solutions for enterprises." },
-    { icon: <Clock className="w-10 h-10 text-cyan-400" />, title: "On-Demand Support", desc: "Quick response teams to support urgent staffing needs." },
-    { icon: <Award className="w-10 h-10 text-cyan-400" />, title: "Training & Development", desc: "Skilled professionals trained for customer service & hospitality." },
-    { icon: <Truck className="w-10 h-10 text-cyan-400" />, title: "Logistics Support", desc: "End-to-end logistics and operational support for events." },
-    { icon: <Calendar className="w-10 h-10 text-cyan-400" />, title: "Event Planning", desc: "Comprehensive planning and execution of corporate & social events." },
+    { icon: <Users className="w-10 h-10" />, title: "Human Workforce", desc: "Trained manpower for corporate, hospitality, and mega events." },
+    { icon: <Ticket className="w-10 h-10" />, title: "Ticketing Solutions", desc: "Seamless ticketing platforms & onsite management." },
+    { icon: <Shield className="w-10 h-10" />, title: "Ushers & Security", desc: "Professional ushers, event staff, and certified security personnel." },
+    { icon: <Briefcase className="w-10 h-10" />, title: "Corporate Staffing", desc: "Temporary and permanent staffing solutions for enterprises." },
+    { icon: <Clock className="w-10 h-10" />, title: "On-Demand Support", desc: "Quick response teams to support urgent staffing needs." },
+    { icon: <Award className="w-10 h-10" />, title: "Training & Development", desc: "Skilled professionals trained for customer service & hospitality." },
+    { icon: <Truck className="w-10 h-10" />, title: "Logistics Support", desc: "End-to-end logistics and operational support for events." },
+    { icon: <Calendar className="w-10 h-10" />, title: "Event Planning", desc: "Comprehensive planning and execution of corporate & social events." },
   ];
 
   const faqs = [
@@ -140,27 +140,31 @@ export default function LandingPage() {
     <div
       className={
         isDark
-          ? "bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen"
-          : "bg-gradient-to-tr from-white via-cyan-50 to-gray-100 text-gray-800 min-h-screen"
+          ? "bg-[#000020] text-white min-h-screen"
+          : "bg-gradient-to-tr from-white via-yellow-50 to-gray-100 text-gray-800 min-h-screen"
       }
+      style={isDark ? { 
+        background: "linear-gradient(135deg, #000020 0%, #000080 50%, #000040 100%)" 
+      } : {}}
     >
       {/* Header with bubble shape and translucent blur */}
       <header
         ref={headerRef}
-        className="fixed top-4 left-1/2 transform -translate-x-1/2 w-11/12 max-w-6xl rounded-3xl z-50 transition-all duration-300 bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/10"
+        className="fixed top-4 left-1/2 transform -translate-x-1/2 w-11/12 max-w-6xl rounded-3xl z-50 transition-all duration-300 bg-white/10 dark:bg-[#000080]/30 backdrop-blur-md border border-white/10"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-          <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent z-10">
-            Workforce.pk
-          </Link>
-
+            <Link to="/" className="text-2xl font-bold z-10 flex items-center">
+              <span className={isDark ? "text-white" : "text-[#000080]"}>Work</span>
+              <span className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent">Force</span>
+              <span className={isDark ? "text-white" : "text-[#000080]"}>.pk</span>
+            </Link>
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8 text-slate-700 dark:text-slate-200 font-medium">
-            <button onClick={() => scrollToSection("home")} className="hover:text-cyan-500 transition">Home</button>
-            <button onClick={() => scrollToSection("services")} className="hover:text-cyan-500 transition">Services</button>
-            <button onClick={() => scrollToSection("gallery")} className="hover:text-cyan-500 transition">Gallery</button>
-            <button onClick={() => scrollToSection("faqs")} className="hover:text-cyan-500 transition">FAQs</button>
-            <Link to="/appoint" className="hover:text-cyan-500 transition">Appoint Us</Link>
+            <button onClick={() => scrollToSection("home")} className="hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Home</button>
+            <button onClick={() => scrollToSection("services")} className="hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Services</button>
+            <button onClick={() => scrollToSection("gallery")} className="hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Gallery</button>
+            <button onClick={() => scrollToSection("faqs")} className="hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">FAQs</button>
+            <Link to="/appoint" className="hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Appoint Us</Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -172,66 +176,66 @@ export default function LandingPage() {
           </button>
         </div>
 
-     {/* Enhanced Mobile Dropdown Menu with Matching Blur & Bubble Effect */}
-                    <AnimatePresence>
-            {mobileMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -20, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="md:hidden absolute top-full left-0 right-0 
+        {/* Enhanced Mobile Dropdown Menu with Matching Blur & Bubble Effect */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="md:hidden absolute top-full left-0 right-0 
                           bg-gradient-to-br from-white/10 via-white/5 to-white/10 
-                          dark:from-black/20 dark:via-black/10 dark:to-black/20
+                          dark:bg-[#000080]/30
                           backdrop-blur-md rounded-3xl border border-white/10 
                           shadow-xl mt-2 py-2 overflow-hidden"
-              >
-                <div className="flex flex-col bckdrop-blur-md bg-white/30 dark:bg-black/40">
-                  <button 
-                    onClick={() => scrollToSection("home")} 
-                    className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
-                              hover:text-cyan-00 hover:bg-white/5 dark:hover:bg-white/5 
+            >
+              <div className="flex flex-col backdrop-blur-md bg-white/30 dark:bg-[#000080]/40">
+                <button 
+                  onClick={() => scrollToSection("home")} 
+                  className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
+                              hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent
                               transition-all duration-200 border-b border-white/10 flex items-center"
-                  >
-                    Home
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("services")} 
-                    className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
-                              hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                >
+                  Home
+                </button>
+                <button 
+                  onClick={() => scrollToSection("services")} 
+                  className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
+                              hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent
                               transition-all duration-200 border-b border-white/10 flex items-center"
-                  >
-                    Services
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("gallery")} 
-                    className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
-                              hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                >
+                  Services
+                </button>
+                <button 
+                  onClick={() => scrollToSection("gallery")} 
+                  className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
+                              hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent
                               transition-all duration-200 border-b border-white/10 flex items-center"
-                  >
-                    Gallery
-                  </button>
-                  <button 
-                    onClick={() => scrollToSection("faqs")} 
-                    className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
-                              hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                >
+                  Gallery
+                </button>
+                <button 
+                  onClick={() => scrollToSection("faqs")} 
+                  className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
+                              hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent
                               transition-all duration-200 border-b border-white/10 flex items-center"
-                  >
-                    FAQs
-                  </button>
-                  <Link 
-                    to="/appoint" 
-                    className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
-                              hover:text-cyan-500 hover:bg-white/5 dark:hover:bg-white/5 
+                >
+                  FAQs
+                </button>
+                <Link 
+                  to="/appoint" 
+                  className="py-4 px-6 text-lg text-slate-800 dark:text-slate-200 
+                              hover:bg-gradient-to-r hover:from-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent
                               transition-all duration-200 flex items-center"
-                  >
-                    Appoint Us
-                  </Link>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </header>
+                >
+                  Appoint Us
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
 
       {/* Hero Section with Background Image - Fixed for mobile */}
       <section id="home" className="relative flex items-center justify-center min-h-screen px-4 pt-20 overflow-hidden">
@@ -246,19 +250,19 @@ export default function LandingPage() {
         </div>
         
         <div className="max-w-3xl mx-auto relative z-10 text-center md:text-left w-full">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold drop-shadow-lg bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold drop-shadow-lg bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent animate-pulse">
             Professional Workforce Solutions for Your Events
           </h1>
           <p className="mt-6 text-lg md:text-xl text-gray-200">
             From ushers and security to ticketing and logistics — Workforce.pk provides everything you need for a flawless event.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <Link to="/appoint" className="px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-cyan-500 hover:bg-cyan-600 transition-all shadow-lg hover:shadow-cyan-500/30 text-white font-semibold text-lg">
+            <Link to="/appoint" className="px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 hover:from-yellow-500 hover:via-yellow-400 hover:to-yellow-600 transition-all shadow-lg hover:shadow-yellow-500/50 text-white font-semibold text-lg transform hover:scale-105">
               Hire Our Team
             </Link>
             <button 
               onClick={() => scrollToSection("services")}
-              className="px-6 py-3 sm:px-8 sm:py-4 rounded-full border-2 border-cyan-500 text-cyan-500 hover:bg-cyan-500 hover:text-white transition-all font-semibold text-lg"
+              className="px-6 py-3 sm:px-8 sm:py-4 rounded-full border-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white hover:bg-gradient-to-r hover:from-yellow-500 hover:to-yellow-600 transition-all font-semibold text-lg transform hover:scale-105"
             >
               Explore Services
             </button>
@@ -267,18 +271,18 @@ export default function LandingPage() {
         
         {/* Animated background elements */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute top-10 left-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-10 left-1/4 w-72 h-72 bg-gradient-to-r from-yellow-400/20 to-yellow-500/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-gradient-to-r from-yellow-300/20 to-yellow-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white/5 dark:bg-black/10 backdrop-blur-md relative z-10 px-4">
+      <section className="py-16 bg-white/5 dark:bg-[#000080]/20 backdrop-blur-md relative z-10 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-cyan-500">{stat.value}</div>
+                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent">{stat.value}</div>
                 <div className="mt-2 text-sm md:text-base text-gray-700 dark:text-gray-300">{stat.label}</div>
               </div>
             ))}
@@ -287,10 +291,10 @@ export default function LandingPage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className={isDark ? "py-20 bg-white/5 backdrop-blur-md relative z-10 px-4" : "py-20 bg-cyan-50/60 backdrop-blur-md relative z-10 px-4"}>
+      <section id="services" className={isDark ? "py-20 bg-[#000080]/20 backdrop-blur-md relative z-10 px-4" : "py-20 bg-yellow-50/60 backdrop-blur-md relative z-10 px-4"}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-cyan-500">Our Services</h2>
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent">Our Services</h2>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-700 dark:text-gray-300">
               Comprehensive workforce solutions tailored to meet your event and corporate needs
             </p>
@@ -301,14 +305,16 @@ export default function LandingPage() {
                 key={index}
                 className={
                   isDark
-                    ? "bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
-                    : "bg-white border border-gray-200 hover:border-cyan-400 hover:shadow-lg p-6 rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-2"
+                    ? "bg-[#000080]/20 backdrop-blur-md p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-[#000080]/30 group"
+                    : "bg-white border border-gray-200 hover:border-yellow-400 hover:shadow-lg p-6 rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-2 group"
                 }
               >
                 <div className="flex justify-center">
-                  {service.icon}
+                  <div className="group-hover:bg-gradient-to-r group-hover:from-yellow-300 group-hover:via-yellow-400 group-hover:to-yellow-500 group-hover:bg-clip-text group-hover:text-transparent">
+                    {service.icon}
+                  </div>
                 </div>
-                <h3 className="mt-4 text-xl font-semibold text-center">{service.title}</h3>
+                <h3 className="mt-4 text-xl font-semibold text-center group-hover:bg-gradient-to-r group-hover:from-yellow-300 group-hover:via-yellow-400 group-hover:to-yellow-500 group-hover:bg-clip-text group-hover:text-transparent">{service.title}</h3>
                 <p className="mt-2 text-gray-600 dark:text-gray-300 text-center text-sm md:text-base">{service.desc}</p>
               </div>
             ))}
@@ -317,22 +323,22 @@ export default function LandingPage() {
       </section>
 
       {/* Gallery Section with Image Slideshow */}
-      <section id="gallery" className="py-20 bg-gradient-to-r from-cyan-900/20 to-blue-900/20 backdrop-blur-md relative z-10 px-4">
+      <section id="gallery" className="py-20 bg-gradient-to-r from-[#000080]/30 to-[#000060]/30 backdrop-blur-md relative z-10 px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-cyan-500">Our Work in Action</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent">Our Work in Action</h2>
           
           <div className="relative">
             {/* Navigation Buttons */}
             <button 
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 z-10 bg-cyan-500 hover:bg-cyan-600 text-white rounded-full p-2 shadow-lg"
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 z-10 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white rounded-full p-2 shadow-lg transform hover:scale-110 transition-all"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             
             <button 
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 z-10 bg-cyan-500 hover:bg-cyan-600 text-white rounded-full p-2 shadow-lg"
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 z-10 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white rounded-full p-2 shadow-lg transform hover:scale-110 transition-all"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -363,7 +369,7 @@ export default function LandingPage() {
             {slides.map((_, index) => (
               <button
                 key={index}
-                className={`w-3 h-3 rounded-full ${index === activeSlide ? 'bg-cyan-500' : 'bg-gray-400'}`}
+                className={`w-3 h-3 rounded-full transition-all ${index === activeSlide ? 'bg-gradient-to-r from-yellow-400 to-yellow-500' : 'bg-gray-400'}`}
                 onClick={() => setActiveSlide(index)}
                 aria-label={`View slide ${index + 1}`}
               />
@@ -373,32 +379,32 @@ export default function LandingPage() {
       </section>
 
       {/* About Section */}
-      <section className="py-20 bg-gradient-to-br from-cyan-900/40 to-cyan-700/20 backdrop-blur-md relative z-10 px-4">
+      <section className="py-20 bg-gradient-to-br from-[#000080]/40 to-[#000060]/30 backdrop-blur-md relative z-10 px-4">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-cyan-500 mb-8">Why Choose Workforce.pk?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent mb-8">Why Choose Workforce.pk?</h2>
           
           <div className="grid md:grid-cols-3 gap-6 mt-12 text-left">
-            <div className={isDark ? "bg-white/10 p-6 rounded-xl" : "bg-white/80 p-6 rounded-xl"}>
-              <div className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center mb-4">
-                <CheckCircle className="w-6 h-6 text-cyan-500" />
+            <div className={isDark ? "bg-[#000080]/20 p-6 rounded-xl border border-[#000080]/30 group" : "bg-white/80 p-6 rounded-xl group"}>
+              <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <CheckCircle className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Quality Assurance</h3>
+              <h3 className="text-xl font-semibold mb-2 group-hover:bg-gradient-to-r group-hover:from-yellow-300 group-hover:via-yellow-400 group-hover:to-yellow-500 group-hover:bg-clip-text group-hover:text-transparent">Quality Assurance</h3>
               <p className="text-gray-700 dark:text-gray-300">All our staff undergo rigorous training and background checks to ensure the highest standards.</p>
             </div>
             
-            <div className={isDark ? "bg-white/10 p-6 rounded-xl" : "bg-white/80 p-6 rounded-xl"}>
-              <div className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center mb-4">
-                <Clock className="w-6 h-6 text-cyan-500" />
+            <div className={isDark ? "bg-[#000080]/20 p-6 rounded-xl border border-[#000080]/30 group" : "bg-white/80 p-6 rounded-xl group"}>
+              <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Clock className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Quick Response</h3>
+              <h3 className="text-xl font-semibold mb-2 group-hover:bg-gradient-to-r group-hover:from-yellow-300 group-hover:via-yellow-400 group-hover:to-yellow-500 group-hover:bg-clip-text group-hover:text-transparent">Quick Response</h3>
               <p className="text-gray-700 dark:text-gray-300">We understand urgency and can deploy teams within hours for last-minute requirements.</p>
             </div>
             
-            <div className={isDark ? "bg-white/10 p-6 rounded-xl" : "bg-white/80 p-6 rounded-xl"}>
-              <div className="w-12 h-12 bg-cyan-500/20 rounded-full flex items-center justify-center mb-4">
-                <Shield className="w-6 h-6 text-cyan-500" />
+            <div className={isDark ? "bg-[#000080]/20 p-6 rounded-xl border border-[#000080]/30 group" : "bg-white/80 p-6 rounded-xl group"}>
+              <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Shield className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Reliability</h3>
+              <h3 className="text-xl font-semibold mb-2 group-hover:bg-gradient-to-r group-hover:from-yellow-300 group-hover:via-yellow-400 group-hover:to-yellow-500 group-hover:bg-clip-text group-hover:text-transparent">Reliability</h3>
               <p className="text-gray-700 dark:text-gray-300">With hundreds of successful events, we've built a reputation for dependable service.</p>
             </div>
           </div>
@@ -406,26 +412,28 @@ export default function LandingPage() {
       </section>
 
       {/* FAQs Section */}
-      <section id="faqs" className={isDark ? "py-20 bg-white/5 backdrop-blur-md relative z-10 px-4" : "py-20 bg-gray-50 backdrop-blur-md relative z-10 px-4"}>
+      <section id="faqs" className={isDark ? "py-20 bg-[#000080]/20 backdrop-blur-md relative z-10 px-4" : "py-20 bg-yellow-50 backdrop-blur-md relative z-10 px-4"}>
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-cyan-500">Frequently Asked Questions</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent">Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
                 className={
                   isDark
-                    ? "bg-white/10 backdrop-blur-md rounded-xl overflow-hidden shadow-md"
-                    : "bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm"
+                    ? "bg-[#000080]/20 backdrop-blur-md rounded-xl overflow-hidden shadow-md border border-[#000080]/30 group"
+                    : "bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm group"
                 }
               >
                 <button
-                  className="w-full p-4 md:p-6 text-left flex justify-between items-center"
+                  className="w-full p-4 md:p-6 text-left flex justify-between items-center group-hover:bg-gradient-to-r group-hover:from-yellow-300 group-hover:via-yellow-400 group-hover:to-yellow-500 group-hover:bg-clip-text group-hover:text-transparent transition-colors"
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={openFAQ === index}
                 >
                   <h3 className="text-lg font-semibold">{faq.q}</h3>
-                  <span>{openFAQ === index ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}</span>
+                  <span className="group-hover:bg-gradient-to-r group-hover:from-yellow-300 group-hover:via-yellow-400 group-hover:to-yellow-500 group-hover:bg-clip-text group-hover:text-transparent">
+                    {openFAQ === index ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                  </span>
                 </button>
                 <div className={`overflow-hidden transition-all duration-300 ${openFAQ === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
                   <div className="px-4 md:px-6 pb-4 md:pb-6 text-gray-600 dark:text-gray-300">{faq.a}</div>
@@ -437,15 +445,15 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-cyan-600 to-blue-600 text-white relative z-10 px-4">
+      <section className="py-20 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 text-white relative z-10 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Elevate Your Event?</h2>
-          <p className="text-lg mb-10 text-cyan-100">Get in touch with us today and let our professional team make your next event a success.</p>
+          <p className="text-lg mb-10 text-yellow-100">Get in touch with us today and let our professional team make your next event a success.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/appoint" className="px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-white text-cyan-600 hover:bg-gray-100 transition-all shadow-lg font-semibold text-lg">
+            <Link to="/appoint" className="px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-white text-yellow-600 hover:bg-gray-100 transition-all shadow-lg font-semibold text-lg transform hover:scale-105">
               Book Now
             </Link>
-            <a href="tel:+923001234567" className="px-6 py-3 sm:px-8 sm:py-4 rounded-full border-2 border-white text-white hover:bg-white/10 transition-all font-semibold text-lg flex items-center justify-center gap-2">
+            <a href="tel:+923001234567" className="px-6 py-3 sm:px-8 sm:py-4 rounded-full border-2 border-white text-white hover:bg-white/10 transition-all font-semibold text-lg flex items-center justify-center gap-2 transform hover:scale-105">
               <Phone className="w-5 h-5" /> Call Us
             </a>
           </div>
@@ -453,30 +461,30 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className={isDark ? "bg-black/40 backdrop-blur-lg py-12 relative z-10 px-4" : "bg-gray-100 backdrop-blur-lg py-12 border-t border-gray-200 relative z-10 px-4"}>
+      <footer className={isDark ? "bg-[#000040]/40 backdrop-blur-lg py-12 relative z-10 px-4" : "bg-yellow-50 backdrop-blur-lg py-12 border-t border-yellow-200 relative z-10 px-4"}>
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-10">
           <div>
-            <h4 className="text-xl font-bold text-cyan-500 mb-4">Workforce.pk</h4>
+            <h4 className="text-xl font-bold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent mb-4">Workforce.pk</h4>
             <p className="text-gray-700 dark:text-gray-300 mb-4">Delivering trusted staffing, ticketing, and event solutions across Pakistan.</p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-cyan-500 transition"><Facebook className="h-5 w-5" /></a>
-              <a href="#" className="hover:text-cyan-500 transition"><Instagram className="h-5 w-5" /></a>
-              <a href="#" className="hover:text-cyan-500 transition"><Linkedin className="h-5 w-5" /></a>
-              <a href="#" className="hover:text-cyan-500 transition"><Twitter className="h-5 w-5" /></a>
+              <a href="#" className="hover:bg-gradient-to-r hover:from-yellow-300 hover:via-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition"><Facebook className="h-5 w-5" /></a>
+              <a href="#" className="hover:bg-gradient-to-r hover:from-yellow-300 hover:via-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition"><Instagram className="h-5 w-5" /></a>
+              <a href="#" className="hover:bg-gradient-to-r hover:from-yellow-300 hover:via-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition"><Linkedin className="h-5 w-5" /></a>
+              <a href="#" className="hover:bg-gradient-to-r hover:from-yellow-300 hover:via-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition"><Twitter className="h-5 w-5" /></a>
             </div>
           </div>
           <div>
-            <h4 className="text-lg font-semibold text-cyan-500 mb-3">Quick Links</h4>
+            <h4 className="text-lg font-semibold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent mb-3">Quick Links</h4>
             <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-              <li><button onClick={() => scrollToSection("home")} className="hover:text-cyan-500 transition">Home</button></li>
-              <li><button onClick={() => scrollToSection("services")} className="hover:text-cyan-500 transition">Services</button></li>
-              <li><button onClick={() => scrollToSection("gallery")} className="hover:text-cyan-500 transition">Gallery</button></li>
-              <li><button onClick={() => scrollToSection("faqs")} className="hover:text-cyan-500 transition">FAQs</button></li>
-              <li><Link to="/appoint" className="hover:text-cyan-500 transition">Appoint Us</Link></li>
+              <li><button onClick={() => scrollToSection("home")} className="hover:bg-gradient-to-r hover:from-yellow-300 hover:via-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Home</button></li>
+              <li><button onClick={() => scrollToSection("services")} className="hover:bg-gradient-to-r hover:from-yellow-300 hover:via-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Services</button></li>
+              <li><button onClick={() => scrollToSection("gallery")} className="hover:bg-gradient-to-r hover:from-yellow-300 hover:via-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Gallery</button></li>
+              <li><button onClick={() => scrollToSection("faqs")} className="hover:bg-gradient-to-r hover:from-yellow-300 hover:via-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">FAQs</button></li>
+              <li><Link to="/appoint" className="hover:bg-gradient-to-r hover:from-yellow-300 hover:via-yellow-400 hover:to-yellow-500 hover:bg-clip-text hover:text-transparent transition">Appoint Us</Link></li>
             </ul>
           </div>
           <div>
-            <h4 className="text-lg font-semibold text-cyan-500 mb-3">Services</h4>
+            <h4 className="text-lg font-semibold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent mb-3">Services</h4>
             <ul className="space-y-2 text-gray-700 dark:text-gray-300">
               <li>Event Staffing</li>
               <li>Ticketing Solutions</li>
@@ -486,18 +494,18 @@ export default function LandingPage() {
             </ul>
           </div>
           <div>
-            <h4 className="text-lg font-semibold text-cyan-500 mb-3">Contact Info</h4>
+            <h4 className="text-lg font-semibold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent mb-3">Contact Info</h4>
             <ul className="space-y-3 text-gray-700 dark:text-gray-300">
               <li className="flex items-start gap-2">
-                <Phone className="w-5 h-5 mt-0.5 text-cyan-500" />
+                <Phone className="w-5 h-5 mt-0.5 bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent" />
                 <span>+92-300-1234567</span>
               </li>
               <li className="flex items-start gap-2">
-                <Mail className="w-5 h-5 mt-0.5 text-cyan-500" />
+                <Mail className="w-5 h-5 mt-0.5 bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent" />
                 <span>contact@workforce.pk</span>
               </li>
               <li className="flex items-start gap-2">
-                <MapPin className="w-5 h-5 mt-0.5 text-cyan-500" />
+                <MapPin className="w-5 h-5 mt-0.5 bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 bg-clip-text text-transparent" />
                 <span>Karachi, Pakistan</span>
               </li>
             </ul>
